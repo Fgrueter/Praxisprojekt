@@ -94,6 +94,6 @@ def frozenAI(env,hole_array,rows,columns):
     
     return hole_array
 
-env = gym.make("FrozenLake8x8-v0")
-array=frozenAI(env,np.zeros((8,8)),8,8)
+env = gym.make("FrozenLake8x8-v0")          
+array=frozenAI(env,np.zeros((8,8)),8,8)        #The size from the array must fit the rows and columbs and the environement
 array2=frozenAI(env,array,8,8)
