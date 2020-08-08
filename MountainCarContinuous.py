@@ -30,7 +30,7 @@ def QLearning(env, learning, discount, epsilon, min_eps, episodes):
     reward_list = []
     ave_reward_list = []
     # Calculate episodic reduction in epsilon
-    reduction = (epsilon - min_eps)*8/episodes
+    reduction = (epsilon - min_eps)*8/episodes  
     # Run Q learning algorithm
     for i in range(episodes):
         # Initialize parameters
@@ -51,14 +51,14 @@ def QLearning(env, learning, discount, epsilon, min_eps, episodes):
             # Determine next action - epsilon greedy strategy
             if np.random.random() < 1 - epsilon:
                 action[0]= np.argmax(Q[state_adj[0], state_adj[1]])/(num_acts-1)*(env.action_space.high-env.action_space.low)+env.action_space.low #Best Mögliche Aktion für den Wert
-                actionCell= int((num_acts-1)/(env.action_space.high-env.action_space.low)*(action[0]-env.action_space.low))
+                actionCell= int((num_acts-1)/(env.action_space.high-env.action_space.low)*(action[0]-env.action_space.low)) #Wert wird für die Tabelle diskretisiert,da in ihr nur Integer gespeichert werden können
             else:
                # action = np.random.randfloat(env.action_space.low,env.action_space.high)
                 action[0]=2*np.random.random()-1
                 actionCell= int((num_acts-1)/(env.action_space.high-env.action_space.low)*(action[0]-env.action_space.low))
             # Get next state and reward
             state2, reward, done, info = env.step(action) 
-            reward += math.pow(action[0], 2) * 0.1
+            reward += math.pow(action[0], 2) * 0.1              #Der reward wird in der Umgebung um math.pow(action[0],2)*0.1 verringert. Da dadurch nur noch zu kleine Bewegungen ausgewählt wurden, wird der reward wieder um diesen Wert erhöht
 
             # Discretize state2
             state2_adj = (state2 - env.observation_space.low)*np.array([10, 100])
@@ -103,7 +103,8 @@ def QLearning(env, learning, discount, epsilon, min_eps, episodes):
     return Q,ave_reward_list
             
 
-
+#Diese Funktion testet, wie gut die Ergebnisse einer erlernten QTabelle sind. Dabei wird die Tabelle nicht weiter verändert und nur noch der optimale Wert für den Zustand aus der Tabelle verwendet
+#Für Q wird die Q-Tabelle von Q-Learning übergeben und diese dann über die übergebene Episodenanzahl getestet
 def QModel(env,Q,episodes):
     # Determine size of discretized state space
 
