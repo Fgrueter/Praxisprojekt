@@ -10,7 +10,7 @@ env.reset()
 env.render()
 reward=0.00
 
-forbidden=[5,7,11,12]
+forbidden=[5,7,11,12]           #Hier werden die Löcher gespeichert
 
 actions = {
     'Left': 0,
@@ -25,7 +25,7 @@ bool=True
 while(bool):
     #counter=counter+1
     winning_sequence=[random.choice(["Left","Down","Right"]),random.choice(["Left","Down","Right"]),random.choice(["Left","Down"]),random.choice(["Left","Down","Right","Up"])]
-    for a in winning_sequence:
+    for a in winning_sequence:                                          #Es werden die vier zuvor ausgewählten Aktionen hintereinander ausgeführt
         new_state, reward, done, info = env.step(actions[a])
         counter2=counter2+1
         env.render()
@@ -33,7 +33,7 @@ while(bool):
         if new_state in forbidden:
             env.reset()
             break
-        if new_state==15:
+        if new_state==15:                                   #Zielpunkt
             bool=False
             break
 #print("no.of attempts",counter)
