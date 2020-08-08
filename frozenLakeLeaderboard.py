@@ -31,7 +31,7 @@ while(bool):
         env.render()
         print("Reward: {:.2f}".format(reward))
         if new_state in forbidden:
-            counter2=counter2-1
+            counter2=counter2-1                             #Wenn man an diesem Punkt ist, hat man sich nicht bewegt, aber der Counter wurde trotzdem erhöht
             env.reset()
             break
         if new_state==15:                                   #Zielpunkt
