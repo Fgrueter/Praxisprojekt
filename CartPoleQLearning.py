@@ -19,6 +19,8 @@ def QLearning(env, learning, discount, epsilon, min_eps, episodes):
     # Determine size of discretized state space
     
     array=np.array([20,10,20,30])
+    #Der statespace ist beim Cartpole Position,Geschwindigkeit,Stangenwinkel und die Veränderung von diesem
+    #Da Geschwindigkeit und die Veränderung den maximalen Zahlenbereich haben, muss dieser Bereich (in diesem Fall auf 20) reduziert werden
     num_states = np.array([env.observation_space.high[0]- env.observation_space.low[0],20,env.observation_space.high[2]- env.observation_space.low[2],20])*array
     num_states = np.round(num_states, 0).astype(int) + 1
   #  num_states2 = (env.action_space.high - env.action_space.low)*np.array([10])
@@ -66,14 +68,14 @@ def QLearning(env, learning, discount, epsilon, min_eps, episodes):
             state2_adj = np.round(state2_adj, 0).astype(int)
             
             #Allow for terminal states
-            if done and (i+1) % 100 == 0 and np.mean(reward_list)>=195.0:
+            if done and (i+1) % 100 == 0 and np.mean(reward_list)>=195.0:           #Das ist in dieser Umgebung als Ziel festgelegt
                 Q[state_adj[0], state_adj[1],state_adj[2],state_adj[3], action] = reward
                 goal_reached+=1     
                 break;
             # Adjust Q value for current state
             else:
                 delta = learning*(reward + discount*np.max(Q[state2_adj[0],state2_adj[1],state2_adj[2],state2_adj[3]])- Q[state_adj[0], state_adj[1],state_adj[2],state_adj[3],action])
-                Q[state_adj[0], state_adj[1],state_adj[2],10,action] += delta
+                Q[state_adj[0], state_adj[1],state_adj[2],state_adj[3],action] += delta
                # print(Q[state_adj[0], state_adj[1],action])
             # Update variables
             tot_reward += reward
