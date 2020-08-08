@@ -96,6 +96,8 @@ def QLearning(env, learning, discount, epsilon, min_eps, episodes):
 
     return Q,ave_reward_list
 
+#Diese Funktion testet, wie gut die Ergebnisse einer erlernten QTabelle sind. Dabei wird die Tabelle nicht weiter verändert und nur noch der optimale Wert für den Zustand aus der Tabelle verwendet
+#Für Q wird die Q-Tabelle von Q-Learning übergeben und diese dann über die übergebene Episodenanzahl getestet
 def QModel(env,Q,episodes):
     # Determine size of discretized state space
     array=np.array([10, 110])
@@ -166,7 +168,7 @@ def QModel(env,Q,episodes):
     print("Links ausgewählt:",links)
     gesamt=rechts+stehen+links
     print("Gesamt:",gesamt)
-    return ave_reward_list2
+    return ave_reward_list2                     #Ausgabe der, über jeweils 100 Episoden durchschnittlichen, Rewards im Verlaufe der gesamten Episodenanzahl 
 # Run Q-learning algorithm
 Qtable,rewards = QLearning(env, 0.1, 0.9, 0.8, 0, 10000)#learning, discount, epsilon, min_eps, episodes
 plt.plot(100*(np.arange(len(rewards)) + 1), rewards)
