@@ -24,7 +24,7 @@ for i in range(10000):
       if new_state==0:
           l=l+1
       elif new_state==1:
-          r=r+1                 #Hier sind alle Ergebnisse klar zuordbar-> Ergebnisse zeigen:Alle Richtungen ungefähr gleich oft
+          r=r+1                 #Hier sind alle Ergebnisse klar zuordbar-> Ergebnisse zeigen:Alle Richtungen ungefähr gleich oft ausgewählt
       elif new_state==4:
           d=d+1
       env.reset()     
